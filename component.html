@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="vue.js"></script>
+</head>
+<body>
+<div id="target">
+    <input type="text" v-model="input_value">
+    <input type="button" value="提交" @click="addToDo">
+    <ul>
+        <todo_item v-for="(item, index) of arr" :key="index" :content="item"></todo_item>
+    </ul>
+</div>
+
+<script type="text/javascript">
+    Vue.component('todo_item', {
+        props: ['content'],
+        template: '<li>{{content}}</li>'
+    });
+
+    new Vue({
+       el: "#target",
+       data:{
+           input_value: '',
+           arr: []
+       },
+       methods:{
+           addToDo: function () {
+               this.arr.push(this.input_value);
+               this.input_value = '';
+           }
+       }
+    });
+</script>
+</body>
+</html>
