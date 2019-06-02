@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TodoList</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+<div id="todo_wrap">
+    <input type="text" v-model="inputValue">
+    <input type="button" value="提交" @click="todoAdd">
+    <ul>
+        <todo-item v-for="(item, index) of todoArr" :content="item" :index="index" @delete="todoDelete"></todo-item>
+    </ul>
+</div>
+
+<script type="text/javascript">
+    Vue.component('todo-item',{
+        props: ['content', 'index'],
+        template: '<li @click="todoClick">{{content}}</li>',
+        methods: {
+            todoClick:function () {
+                this.$emit('delete', this.index)
+            }
+        }
+    });
+
+    new Vue({
+        el: '#todo_wrap',
+        data: {
+            inputValue: '',
+            todoArr: []
+        },
+        methods: {
+            todoAdd: function () {
+                this.todoArr.push(this.inputValue);
+                this.inputValue = '';
+            },
+            todoDelete: function (index) {
+                this.todoArr.splice(index, 1);
+            }
+        }
+    })
+</script>
+</body>
+</html>
