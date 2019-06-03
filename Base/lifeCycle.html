@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue生命周期</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+<div id="app">
+
+</div>
+
+<script type="text/javascript">
+    var vm = new Vue({
+        el: '#app',
+        template: '<div>{{msg}}</div>',
+        data: {
+            msg: 'Hello Kevin'
+        },
+        //Vue的生命周期钩子函数
+        //创建
+        beforeCreate: function () {
+            console.log('beforeCreate');
+        },
+        created: function () {
+            console.log('created');
+        },
+        //填充
+        beforeMount: function () {
+            console.log('beforeMount');
+        },
+        mounted: function () {
+            console.log('mounted');
+        },
+        //摧毁
+        beforeDestroy: function() {
+            console.log('beforeDestroy');
+        },
+        destroyed: function () {
+            console.log('destroyed');
+        },
+        //数据更新
+        beforeUpdate: function () {
+            console.log('beforeUpdate');
+        },
+        updated: function () {
+            console.log('updated');
+        }
+    })
+</script>
+</body>
+</html>
