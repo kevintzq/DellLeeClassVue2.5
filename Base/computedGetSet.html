@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>getter和setter</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+<div id="app">
+    {{fullName}}
+</div>
+
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            lastName: 'Tu',
+            firstName: 'Zhuoqi'
+        },
+        computed: {
+            fullName: {
+                get: function () {
+                    return this.lastName + ' ' + this.firstName;
+                },
+                set: function (value) {
+                    var arr = value.split(' ');
+                    this.lastName = arr[0];
+                    this.firstName = arr[1];
+                }
+            }
+        }
+    })
+</script>
+</body>
+</html>

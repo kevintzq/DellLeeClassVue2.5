@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue绑定样式</title>
+    <script src="../vue.js"></script>
+    <style type="text/css">
+        .obj_act{color: yellow;}
+        .act{color: red;}
+    </style>
+</head>
+<body>
+<div id="app">
+    <div @click="classObjectClick" :class="{obj_act: isActivated}">Hello</div>
+    <div @click="classArrClick" :class="[arr_act]">Hello</div>
+</div>
+
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            isActivated: false,
+            arr_act: ''
+        },
+        methods: {
+            classObjectClick: function () {
+                this.isActivated = !this.isActivated;
+            },
+            classArrClick: function () {
+                this.arr_act = this.arr_act === 'act' ? '' : 'act';
+            }
+        }
+    })
+</script>
+</body>
+</html>

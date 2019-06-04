@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>计算属性 方法 侦听器</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <div>计算属性：{{fullNameComputed}}{{age}}</div>
+    <div>方法属性：{{fullNameMethod()}}{{age}}</div>
+    <div>侦听器属性：{{fullNameWatch}}{{age}}</div>
+</div>
+<script type="text/javascript">
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            firstName: 'Zhuoqi',
+            lastName: 'Tu',
+            age:29,
+            fullNameWatch: '',
+            fullName: ''
+        },
+        //计算属性，局部缓存，提高页面效率
+        computed: {
+            fullNameComputed: function () {
+                console.log('computed执行');
+                return this.lastName + ' ' + this.firstName;
+            }
+        },
+        //方法，最普通的函数
+        methods: {
+            fullNameMethod: function () {
+                console.log('methods执行');
+                return this.lastName + ' ' + this.firstName;
+            }
+        },
+        //侦听器，只有侦听对象变动了才会执行
+        watch: {
+            firstName: function () {
+                console.log('watch firstName 执行');
+                this.fullNameWatch = this.lastName + ' ' + this.firstName;
+            },
+            lastName: function () {
+                console.log('watch lastName 执行');
+                this.fullNameWatch = this.lastName + ' ' + this.firstName;
+            }
+        }
+    })
+</script>
+</body>
+</html>
