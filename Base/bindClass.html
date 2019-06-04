@@ -7,12 +7,13 @@
     <style type="text/css">
         .obj_act{color: yellow;}
         .act{color: red;}
+        .act2{ background-color: orange;}
     </style>
 </head>
 <body>
 <div id="app">
     <div @click="classObjectClick" :class="{obj_act: isActivated}">Hello</div>
-    <div @click="classArrClick" :class="[arr_act]">Hello</div>
+    <div @click="classArrClick" :class="[arr_act, arr_act2]">Hello</div>
 </div>
 
 <script>
@@ -20,7 +21,8 @@
         el: '#app',
         data: {
             isActivated: false,
-            arr_act: ''
+            arr_act: '',
+            arr_act2: 'act2'
         },
         methods: {
             classObjectClick: function () {

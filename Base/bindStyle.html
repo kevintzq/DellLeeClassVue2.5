@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue绑定Style</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <!--vue绑定的style和class差不多，可以单独绑定对象，也可以绑定数组，其中嵌套style对象-->
+    <div :style="styleObj" @click="styleClick">Hello!</div>
+    <div :style="[styleObj2, styleObj2_1, {fontSize: '20px'}]" @click="styleClick2">Hello 2!</div>
+</div>
+
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            styleObj: {
+                color: 'black'
+            },
+            styleObj2: {
+                color: 'black'
+            },
+            styleObj2_1: {
+                backgroundColor: 'orange'
+            }
+        },
+        methods: {
+            styleClick: function () {
+                this.styleObj.color = this.styleObj.color === 'black' ? 'red' : 'black';
+            },
+            styleClick2: function () {
+                this.styleObj2.color = this.styleObj2.color === 'black' ? 'red' : 'black';
+            }
+        }
+    })
+</script>
+</body>
+</html>
