@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue组件使用的细节</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <div ref="hello" @click="helloClick">Hello Tu!</div>
+
+    <counter ref="counter1" @change="changeClick"></counter>
+    <counter ref="counter2" @change="changeClick"></counter>
+    <div>{{total}}</div>
+</div>
+
+<script>
+    Vue.component('counter', {
+        template: "<div @click='counterClick'>{{number}}</div>",
+        data: function () {
+            return {
+                number: 0
+            }
+        },
+        methods: {
+            counterClick: function () {
+                this.number ++ ;
+                this.$emit('change');
+            }
+        }
+    });
+
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            total: 0
+        },
+        methods: {
+            helloClick: function () {
+                alert(this.$refs.hello.innerHTML);
+            },
+            changeClick: function () {
+                this.total = this.$refs.counter1.number + this.$refs.counter2.number;
+            }
+        }
+    })
+</script>
+</body>
+</html>

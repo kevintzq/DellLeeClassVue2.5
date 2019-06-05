@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue的列表渲染</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <div v-for="(item, index)  of dataList" :key="item.id">
+        {{item.text}} -- {{item.id}}
+    </div>
+
+    <div v-for="(value, key, index) of dataListObj" :key="index">
+        {{key}} -- {{value}} -- {{index}}
+    </div>
+</div>
+
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            dataList: [
+                {id: "001", text: 'one'},
+                {id: "002", text: 'two'},
+                {id: "003", text: 'three'},
+                {id: "004", text: 'four'},
+                {id: "005", text: 'five'},
+            ],
+            dataListObj: {
+                name: 'Tuzhuoqi',
+                age: '29',
+                sex: 'male',
+                hobby: 'code',
+                wife: 'lianhuan',
+                son: 'happy'
+            }
+        }
+    })
+</script>
+</body>
+</html>

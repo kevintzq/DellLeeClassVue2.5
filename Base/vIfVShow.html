@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue的条件渲染</title>
+    <script src="../vue.js"></script>
+    <style type="text/css">
+        div.text {height: 100px; width: 100px; background-color: orange; margin-bottom: 30px;}
+    </style>
+</head>
+<body>
+<div id="app">
+    <div class="text" v-if="showIfDiv" @click="clickIfDiv">i am if!</div>
+    <div class="text" v-else @click="clickIfDiv">i am else!</div>
+    <div class="text" v-show="showDiv" @click="clickShowDiv"></div>
+
+    <!--Vue比较高效，替换dom时会从优执行，如果没有key属性，会导致vue对老dom进行复用，所以进行切换时最好写入key属性进行区别，这样Vue就不会复用dom元素。-->
+    <div v-if="showIfInputDiv">
+        用户名：
+        <input key="username" />
+<!--        <input/>-->
+    </div>
+    <div v-else>
+        密码：
+        <input key="password" />
+<!--        <input/>-->
+    </div>
+    <input type="button" @click="showIfInputDivClick" value="点我">
+</div>
+
+<script type="text/javascript">
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            showIfDiv: true,
+            showDiv: true,
+            showIfInputDiv: true
+        },
+        methods: {
+            clickIfDiv: function () {
+                this.showIfDiv = !this.showIfDiv;
+            },
+            clickShowDiv: function () {
+                this.showDiv = !this.showDiv;
+            },
+            showIfInputDivClick: function () {
+                this.showIfInputDiv = !this.showIfInputDiv;
+            }
+        }
+    })
+</script>
+</body>
+</html>
