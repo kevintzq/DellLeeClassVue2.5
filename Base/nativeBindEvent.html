@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue组件绑定原生事件</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <native @click="nativeClick"></native>
+    <native2 @click.native="native2Click"></native2> <!--原生绑定写法-->
+</div>
+
+<script>
+    Vue.component('native', {
+        template: '<div @click="natClick">点我</div>',
+        methods: {
+            natClick: function () {
+                this.$emit('click');
+            }
+        }
+    });
+
+    Vue.component('native2', {
+        template: '<div>点我</div>'
+    });
+
+    var vm = new Vue({
+        el: '#app',
+        data: {
+
+        },
+        methods: {
+            nativeClick: function () {
+                alert('native 1')
+            },
+            native2Click: function () {
+                alert('native 2')
+            }
+        }
+    })
+</script>
+</body>
+</html>

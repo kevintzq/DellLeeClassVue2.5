@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Vue父子组件间的传递</title>
+        <script src="../vue.js"></script>
+	</head>
+	<body>
+        <div id="app">
+            <counter :count="1" @count-event="countClick"></counter>
+            <counter :count="2" @count-event="countClick"></counter>
+        </div>
+        
+        <script>
+            Vue.component('counter', {
+                props: ['count'],
+                data: function() {
+                    return {
+                        number: this.count
+                    }
+                },
+                template: '<div @click="counterClick">{{number}}</div>',
+                methods: {
+                    counterClick: function() {
+                        this.number ++;
+                        this.$emit('count-event', this.number);
+                    }
+                }
+            });
+            
+            var vm = new Vue({
+                el: '#app',
+                data: {
+                    total: 0
+                },
+                methods: {
+                    countClick: function(value) {
+                        alert(value);
+                    }
+                }
+            });
+        </script>
+	</body>
+</html>

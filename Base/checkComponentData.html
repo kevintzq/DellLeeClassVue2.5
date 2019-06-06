@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue组件传值校验与非props特性</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <child :content="123"></child>
+    <child2 ></child2>
+    <child3 :content="hi"></child3>
+</div>
+
+<script type="text/javascript">
+    Vue.component('child', {
+        props: {
+            content: [String, Number]
+        },
+        template: '<div>{{content}}</div>'
+    });
+
+    Vue.component('child2', {
+        props: {
+            content: {
+                type: String,
+                required: false,
+                default: 'abc'
+            }
+        },
+        template: '<div>{{content}}</div>'
+    });
+
+    Vue.component('child3', {
+        props: {
+            content: {
+                type: String,
+                required: true,
+                validator: function (value) {
+                    return (value.length > 10)
+                }
+            }
+        },
+        template: '<div>{{content}}</div>'
+    });
+
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            hi: 'hello33333333'
+        }
+    })
+</script>
+</body>
+</html>
