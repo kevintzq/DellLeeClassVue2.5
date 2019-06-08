@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue动态组件以及v-once</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <component :is="componentName"></component>
+    <button @click="buttonClick">点我</button>
+</div>
+
+<script>
+    <!-- vonce意思为只渲染一次，就将其加入内存，之后需要用的话直接从内存调用，以提高渲染性能 -->
+    Vue.component('child-1', {
+        template: '<div v-once>child-1</div>'
+    });
+
+    Vue.component('child-2', {
+        template: '<div v-once>child-2</div>'
+    });
+
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            componentName: 'child-1'
+        },
+        methods: {
+            buttonClick: function () {
+                this.componentName = this.componentName === 'child-1' ? 'child-2' : 'child-1';
+            }
+        }
+    })
+</script>
+</body>
+</html>

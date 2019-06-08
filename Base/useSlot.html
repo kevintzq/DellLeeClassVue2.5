@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue插槽的使用</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <comp>
+        <p>插入的元素</p>
+    </comp>
+
+    <comp2>
+        <div slot="header">header</div>
+        <div slot="footer">footer</div>
+    </comp2>
+</div>
+
+<script>
+    Vue.component('comp', {
+       template: '<div><p>屠</p><slot></slot><p>卓奇</p></div>'
+    });
+
+    Vue.component('comp2', {
+        template: '<div><slot name="header"></slot><p>content</p><slot name="footer"></slot></div>'
+    });
+
+    var vm = new Vue({
+        el: '#app',
+        data: {
+
+        }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue的作用域插槽</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <child>
+        <template slot-scope="props">
+            <li>{{props.item}}</li>
+        </template>
+    </child>
+</div>
+
+<script>
+    Vue.component('child', {
+        data: function(){
+          return {
+              arr: [1, 2, 3 ,4]
+          }
+        },
+        template: '<ul><slot v-for="item of arr" :item="item"><li>{{item}}</li></slot></ul>'
+    });
+
+    var vm = new Vue({
+        el: '#app'
+    })
+</script>
+</body>
+</html>
