@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue动画的封装</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <fade :show="divShow">
+        <div>Hello</div>
+    </fade>
+
+    <fade :show="divShow">
+        <h1>Hello</h1>
+    </fade>
+    <button @click="btnClick">点我</button>
+</div>
+
+<script>
+    Vue.component('fade', {
+        props: ['show'],
+        template: '<transition @before-enter="divBeforeEnter" @enter="divEnter"><slot v-if="show"></slot></transition>',
+        methods: {
+            divBeforeEnter: function (el) {
+                el.style.opacity = 0.5;
+            },
+            divEnter: function (el, done) {
+                setTimeout(()=>{
+                   el.style.opacity = 1;
+                   done();
+                }, 2000)
+            }
+
+        }
+    });
+
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            divShow: true
+        },
+        methods: {
+            btnClick: function () {
+                this.divShow = !this.divShow;
+            }
+        }
+    })
+</script>
+</body>
+</html>

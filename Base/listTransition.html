@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue中的列表过渡</title>
+    <script src="../vue.js"></script>
+    <style>
+        .v-enter, v-leave-to{opacity: 0;}
+        .v-enter-active, v-leave-active{transition: opacity 1s;}
+    </style>
+</head>
+<body>
+<div id="app">
+    <transition-group>
+        <div v-for="item of arr" :item="item" :key="item.id">{{item.title}}</div>
+    </transition-group>
+    <button @click="btnClick">点我</button>
+</div>
+
+<script>
+    var count = 0;
+
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            arr: []
+        },
+        methods: {
+            btnClick: function () {
+                this.arr.push({
+                    id: count++,
+                    title: 'Hello'
+                })
+            }
+        }
+    })
+</script>
+</body>
+</html>

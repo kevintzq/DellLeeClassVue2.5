@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue中使用Animate.css</title>
+    <script src="../vue.js"></script>
+    <link rel="stylesheet" href="../animate.css" type="text/css"/>
+    <style>
+        .fade-enter, .fade-leave-to {opacity: 0;}
+        .fade-enter-active, .fade-leave-active{transition: opacity 1s;}
+    </style>
+</head>
+<body>
+<div id="app">
+    <transition enter-active-class="animated swing" leave-active-class="animated shake">
+        <div v-show="divShow">Hello</div>
+    </transition>
+    <button @click="buttonClick">点我</button>
+
+
+    <!--同时使用animate和transition-->
+    <transition :duration="{enter: 5000, leave: 10000}" name="fade" appear enter-active-class="animated swing fade-enter-active" leave-active-class="animated shake fade-leave-active" appear-active-class="animated swing">
+        <div v-show="divShow2">Hello 2</div>
+    </transition>
+    <button @click="buttonClick2">点我</button>
+</div>
+
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            divShow: true,
+            divShow2: true
+        },
+        methods: {
+            buttonClick: function () {
+                this.divShow = !this.divShow;
+            },
+            buttonClick2: function () {
+                this.divShow2 = !this.divShow2;
+            }
+        }
+    })
+</script>
+</body>
+</html>

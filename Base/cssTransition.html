@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue的Css动画原理</title>
+    <script src="../vue.js"></script>
+    <style type="text/css">
+        .v-enter{opacity: 0;}
+        .v-enter-active{transition: opacity 2s;}
+        .v-leave-to{opacity: 0;}
+        .v-leave-active{transition: opacity 2s;}
+
+        .myFade-enter{opacity: 0;}
+        .myFade-enter-active{transition: opacity 1s;}
+        .myFade-leave-to{opacity: 0;}
+        .myFade-leave-active{transition: opacity 1s;}
+    </style>
+</head>
+<body>
+<div id="app">
+    <transition>
+        <div v-if="divIfShow">Hello</div>
+    </transition>
+    <button @click="ifShowClick">点我</button>
+
+    <transition name="myFade">
+        <div v-show="divShow">Hello</div>
+    </transition>
+    <button @click="showClick">点我</button>
+</div>
+
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            divIfShow: true,
+            divShow: true
+        },
+        methods: {
+            ifShowClick: function () {
+                this.divIfShow = !this.divIfShow;
+            },
+            showClick: function () {
+                this.divShow = !this.divShow;
+            }
+        }
+    })
+</script>
+</body>
+</html>

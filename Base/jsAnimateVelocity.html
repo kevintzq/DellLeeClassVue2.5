@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue的Js动画与Velocity的结合</title>
+    <script src="../vue.js"></script>
+    <script src="../velocity.min.js"></script>
+</head>
+<body>
+<div id="app">
+    <transition name="fade" @before-enter="divBeforeEnter" @enter="divEnter" @after-enter="divAfterEnter">
+        <div v-show="divShow">Hello</div>
+    </transition>
+    <button @click="buttonClick">点我</button>
+</div>
+
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            divShow: true
+        },
+        methods: {
+            // buttonClick: function () {
+            //     this.divShow = !this.divShow;
+            // },
+            // divBeforeEnter: function (el) {
+            //     el.style.color = 'red';
+            // },
+            // divEnter: function (el, done) {
+            //     setTimeout(
+            //         ()=>{
+            //             el.style.color = 'blue';
+            //         }, 2000
+            //     )
+            //     setTimeout(
+            //         ()=>{
+            //             done();
+            //         }, 4000
+            //     )
+            // },
+            // divAfterEnter: function (el) {
+            //     el.style.color = 'green';
+            // }
+            buttonClick: function () {
+                this.divShow = !this.divShow;
+            },
+            divBeforeEnter: function (el) {
+                el.style.opacity = 0;
+            },
+            divEnter: function (el, done) {
+                Velocity(el, {
+                    opacity: 1
+                }, {
+                    duration: 1000,
+                    complete: done
+                })
+
+            },
+            divAfterEnter: function (el) {
+                console.log('动画结束');
+            }
+        }
+    })
+</script>
+</body>
+</html>
